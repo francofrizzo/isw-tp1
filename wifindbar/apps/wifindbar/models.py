@@ -5,8 +5,10 @@ from django.contrib.auth.models import User
 
 class Bar(models.Model):
     nombre = models.CharField(max_length=128)
-    latitud = models.DecimalField(max_digits=9,decimal_places=6)
-    longitud = models.DecimalField(max_digits=9,decimal_places=6)
+    # https://en.wikipedia.org/wiki/Decimal_degrees
+    # http://gis.stackexchange.com/questions/8650/measuring-accuracy-of-latitude-and-longitude
+    latitud = models.DecimalField(max_digits=8,decimal_places=5)
+    longitud = models.DecimalField(max_digits=8,decimal_places=5)
 
 class Caracteristica(models.Model):
     nombre = models.CharField(max_length=64, unique=True)
