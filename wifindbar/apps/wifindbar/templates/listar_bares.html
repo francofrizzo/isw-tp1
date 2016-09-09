@@ -1,0 +1,42 @@
+{% extends 'generic.html' %}
+
+{% load staticfiles %}
+{% block title %}Buscar bares{% endblock %}
+
+{% block main %}
+
+
+<h1 class="major">Buscar bares...</h1>
+
+<form method="post" action="">
+										<div class="row uniform">
+											<div class="12u$">
+												<input type="text" name="direccion" id="direccion" value="" placeholder="Name" />
+											</div>
+
+											<div class="12u$">
+													<input type="submit" value="Buscar" class="special" />
+											</div>
+										</div>
+									</form>
+
+<p>Probando</p>
+<table class="table table-bordered table-condensed table-hover table-striped" >
+          <thead>
+            <th>Bar</th>
+            <th>Direccion</th>
+            <th>Ciudad</th>
+          </thead>
+          <tbody>
+            {% for b in object_list %}
+
+                <tr>
+                  <td>{{b.nombre}}</td>
+                  <td>{{b.direccion}}</td>
+                  <td>{{b.ciudad}}</td>
+                </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+{% endblock main %}
