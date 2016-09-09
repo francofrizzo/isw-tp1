@@ -1,1 +1,7 @@
 Django>=1.10,<1.11
+django-extensions==1.7.4
+geopy==1.11.0
+gunicorn==19.6.0
+psycopg2==2.6.2
+six==1.10.0
+Werkzeug==0.11.11

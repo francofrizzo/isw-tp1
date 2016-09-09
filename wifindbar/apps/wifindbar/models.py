@@ -1,14 +1,25 @@
-from django.db import models
+from django.contrib.gis.db import models
 from django.contrib.auth.models import User
+
+## Lecturas recomendadas:
+# https://alastaira.wordpress.com/2011/01/23/the-google-maps-bing-maps-spherical-mercator-projection/
+# https://docs.djangoproject.com/en/1.10/ref/contrib/gis/model-api/#selecting-an-srid
+# http://postgis.net/docs/manual-2.1/using_postgis_dbmanagement.html#PostGIS_GeographyVSGeometry
+# https://en.wikipedia.org/wiki/Decimal_degrees
+# http://gis.stackexchange.com/questions/8650/measuring-accuracy-of-latitude-and-longitude
+
 
 # Create your models here.
 
 class Bar(models.Model):
     nombre = models.CharField(max_length=128)
-    # https://en.wikipedia.org/wiki/Decimal_degrees
-    # http://gis.stackexchange.com/questions/8650/measuring-accuracy-of-latitude-and-longitude
-    latitud = models.DecimalField(max_digits=8,decimal_places=5)
-    longitud = models.DecimalField(max_digits=8,decimal_places=5)
+    direccion = models.CharField(blank=True,max_length=100)
+    ciudad = models.CharField(blank=True,max_length=50)
+
+    coordenadas = models.PointField(geography=True, blank=True, null=True)
+    def __str__(self):
+        return self.nombre
+
 
 class Caracteristica(models.Model):
     nombre = models.CharField(max_length=64, unique=True)

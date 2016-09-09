@@ -40,8 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     # apps
     'wifindbar.apps.wifindbar',
+    'django.contrib.gis',
 ]
 
 MIDDLEWARE = [
@@ -80,7 +82,7 @@ WSGI_APPLICATION = 'wifindbar.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.contrib.gis.db.backends.spatialite',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
@@ -139,3 +141,5 @@ STATICFILES_DIRS = (
 )
 # print(STATICFILES_DIRS)
 STATIC_ROOT = "/srv/static"
+
+SPATIALITE_LIBRARY_PATH = 'mod_spatialite'
