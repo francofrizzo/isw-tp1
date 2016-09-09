@@ -26,8 +26,8 @@
 				<nav>
 					<ul>
 						<li><a href="index.html">Home</a></li>
-						<li><a href="generic.html" class="active">Generic</a></li>
-						<li><a href="elements.html">Elements</a></li>
+						<!-- <li><a href="generic.html" class="active">Generic</a></li>
+						<li><a href="elements.html">Elements</a></li> -->
 					</ul>
 				</nav>
 			</header>
@@ -37,6 +37,15 @@
 
 				<!-- Main -->
 					<section id="main" class="wrapper">
+						<div class="12u$">
+											{% if messages %}
+											<ul class="actions vertical small messages">
+												{% for message in messages %}
+												<li{% if message.tags %} class="{{ message.tags }}"{% endif %}><span class="button special small fit">{{ message }}</span></li>
+												{% endfor %}
+											</ul>
+											{% endif %}
+						</div>
 						<div class="inner">
 							{% block main %}{% endblock %}
 					</section>
