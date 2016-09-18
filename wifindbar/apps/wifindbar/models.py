@@ -22,9 +22,15 @@ class Bar(models.Model):
         return self.nombre
 
 
+
 class Caracteristica(models.Model):
     nombre = models.CharField(max_length=64, unique=True)
     obligatoria = models.BooleanField(default=False)
+    class Meta:
+        verbose_name = "característica"
+        verbose_name_plural = "características"
+    def __str__(self):
+        return self.nombre
 
 class Calificacion(models.Model):
     user = models.ForeignKey(User)
@@ -34,3 +40,5 @@ class Calificacion(models.Model):
     class Meta:
         unique_together = (("user", "bar", "caracteristica"), )
         index_together = (("bar", "caracteristica"), )
+        verbose_name = "calificación"
+        verbose_name_plural = "calificaciones"
