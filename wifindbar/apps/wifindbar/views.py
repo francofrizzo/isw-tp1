@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView
 from .models import Bar, Calificacion
+from .forms import BarModelForm
 from django.contrib import messages
 from django.contrib.gis import geos
 from django.contrib.gis import measure
@@ -34,3 +36,8 @@ class BarDetailView(DetailView):
        context = super(BarDetailView, self).get_context_data(**kwargs)
        context['calificaciones'] = Calificacion.objects.filter(bar=context['object'])
        return context
+
+
+class BarCreateView(CreateView):
+    form_class = BarModelForm
+    template_name = "crear_bar.html"
