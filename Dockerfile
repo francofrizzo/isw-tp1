@@ -18,7 +18,7 @@ RUN pip install virtualenv
 WORKDIR /tmp
 RUN wget -O - 'http://www.gaia-gis.it/gaia-sins/libspatialite-4.3.0a.tar.gz' | tar -xzf -
 WORKDIR /tmp/libspatialite-4.3.0a
-RUN ./configure --disable-freexl && make -j && make install
+RUN ./configure --disable-freexl && make -j 2 && make install
 WORKDIR ..
 RUN rm -rf libspatialite-4.3.0a
 
