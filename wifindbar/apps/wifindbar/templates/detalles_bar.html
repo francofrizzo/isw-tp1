@@ -1,0 +1,34 @@
+{% extends 'generic.html' %}
+
+{% load staticfiles %}
+{% block title %}{{ object.nombre }} - Wifindbar{% endblock %}
+
+{% block main %}
+
+
+<h1 class="major">{{ object.nombre }}</h1>
+
+
+<h2>Dirección: {{object.direccion}}, {{object.ciudad}}</h2>
+
+<h3>Calificaciones de usuarios:</h3>
+
+<table class="table table-bordered table-condensed table-hover table-striped" >
+          <thead>
+            <th>Usuario</th>
+            <th>Característica</th>
+            <th>Puntaje</th>
+          </thead>
+          <tbody>
+            {% for c in calificaciones %}
+
+                <tr>
+                  <td>{{c.user}}</td>
+                  <td>{{c.caracteristica}}</td>
+                  <td>{{c.puntaje}}</td>
+                </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+{% endblock main %}
