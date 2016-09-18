@@ -1,5 +1,6 @@
 from django.contrib.gis.db import models
 from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 ## Lecturas recomendadas:
 # https://alastaira.wordpress.com/2011/01/23/the-google-maps-bing-maps-spherical-mercator-projection/
@@ -29,7 +30,7 @@ class Calificacion(models.Model):
     user = models.ForeignKey(User)
     bar = models.ForeignKey(Bar)
     caracteristica = models.ForeignKey(Caracteristica)
-    puntaje = models.PositiveSmallIntegerField()
+    puntaje = models.PositiveSmallIntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
     class Meta:
         unique_together = (("user", "bar", "caracteristica"), )
         index_together = (("bar", "caracteristica"), )
