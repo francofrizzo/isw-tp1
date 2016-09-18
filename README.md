@@ -22,9 +22,12 @@ Una vez hecho esto,
 
     docker build -t isw/tp1 .
     # espero pacientemente que se instale...
-    docker run -it --rm --name=isw isw/tp1
+    docker run -it --rm -p 8000:8000 --name=isw isw/tp1
 
 les dará un shell en el root del repo. Una vez ahí, con tan solo correr `source
 wifindbar/bin/activate` podrán desarrollar el TP. No es necesario que corran los
 comandos del quickstart a partir de `pip install...`, salvo que se hayan hecho
 modificaciones a la db o se hayan cambiado los requerimientos.
+
+Para ver los resultados, conectense a `http://localhost:8000`, después de correr
+`./manage.py runserver 0.0.0.0`.
