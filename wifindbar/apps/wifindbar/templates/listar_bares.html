@@ -20,7 +20,6 @@
 										</div>
 									</form>
 
-<p>Probando</p>
 <table class="table table-bordered table-condensed table-hover table-striped" >
           <thead>
             <th>Bar</th>
@@ -31,9 +30,9 @@
             {% for b in object_list %}
 
                 <tr>
-                  <td>{{b.nombre}}</td>
-                  <td>{{b.direccion}}</td>
-                  <td>{{b.ciudad}}</td>
+                  <td><a href="{% url 'bar_detail_view' b.id %}">{{b.nombre}}</a></td>
+                  <td><a href="{% url 'bar_detail_view' b.id %}">{{b.direccion}}</a></td>
+                  <td><a href="{% url 'bar_detail_view' b.id %}">{{b.ciudad}}</a></td>
                 </tr>
             {% endfor %}
           </tbody>
