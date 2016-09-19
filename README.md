@@ -10,7 +10,10 @@ Trabajo práctico Nº 1 - Ingeniería de Software 1+2 - FCEN, UBA
     pip install -U -r requirements.txt
     ./manage.py migrate
     ./manage.py loaddata wifindbar/fixtures/initial_data.json
-    ./manage.py runserver
+    ./manage.py createsuperuser
+    ./manage.py runsslserver
+
+Navegar a https://localhost:8000
 
 ## Not-so-quick start
 
