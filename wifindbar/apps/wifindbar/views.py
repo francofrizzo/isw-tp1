@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView
 from .models import Bar, Calificacion, Caracteristica
 from .forms import BarModelForm
@@ -7,7 +7,11 @@ from django.contrib import messages
 from django.contrib.gis import geos
 from django.contrib.gis import measure
 from geopy.geocoders import GoogleV3
+from json_views.views import JSONListView
 # Create your views here.
+
+class HomeView(TemplateView):
+    template_name = 'barescerca.html'
 
 
 # https://docs.djangoproject.com/en/1.10/ref/class-based-views/generic-display/
@@ -56,3 +60,15 @@ class CalificacionCreateView(CreateView):
         context['bar'] = Bar.objects.get(pk=self.kwargs['barid'])
         context['caracteristicas'] = Caracteristica.objects.all()
         return context
+
+class BaresCercaDeCoordenadaJSONList(JSONListView):
+    model = Bar
+    def get_queryset(self):
+        ## 0.00001 grados son aprox 1.1 metros
+        radio_en_metros = self.request.GET.get('radio_en_metros')
+        radio_en_grados_aproximado = 0.00001 * (int(radio_en_metros)/1.1)
+        lat = float(self.request.GET.get('lat'))
+        lng = float(self.request.GET.get('lng'))
+        self.point_centro_de_busqueda = geos.Point(y=lat, x=lng, srid=4326)
+        result = Bar.objects.filter(coordenadas__distance_lte=(self.point_centro_de_busqueda, radio_en_grados_aproximado))
+        return result
