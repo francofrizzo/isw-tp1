@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     # apps
     'wifindbar.apps.wifindbar',
     'django.contrib.gis',
+    'floppyforms',
     # para poder usar geoLocation con el runserver
     'sslserver',
 ]
