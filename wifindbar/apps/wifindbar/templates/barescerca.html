@@ -19,7 +19,7 @@
 
 
 
-<table class="table table-bordered table-condensed table-hover table-striped" >
+<table class="table table-bordered table-condensed table-hover table-striped" id="bares_table">
   <thead>
     <th>Bar</th>
     <th>Direccion</th>
@@ -72,12 +72,34 @@
 
 
 	      $.each(json["bar_list"], function(index, value){
-	        console.log(value);
 					var bar_marker = new google.maps.Marker({
 			     	position: { lng:value["coordenadas"][0], lat:value["coordenadas"][1] },
 			     	map: map,
 			     	title: value["nombre"],
 		  		});
+
+					$("#bares_table").find('tbody')
+    				.append($('<tr>')
+        			.append($('<td>')
+								.append($('<a>')
+									.attr('href', '/' + value["id"])
+            			.text(value["nombre"])
+								)
+            	)
+						.append($('<td>')
+							.append($('<a>')
+								.attr('href', '/' + value["id"])
+								.text(value["direccion"])
+							)
+						)
+						.append($('<td>')
+							.append($('<a>')
+								.attr('href', '/' + value["id"])
+								.text(value["ciudad"])
+							)
+						)
+
+    				);
 	      });
 
 

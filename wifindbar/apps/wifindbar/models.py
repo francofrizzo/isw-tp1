@@ -24,8 +24,9 @@ class Bar(models.Model):
         return {
             'nombre': self.nombre,
             'direccion': self.direccion,
-            'ciudad': self.direccion,
+            'ciudad': self.ciudad,
             'coordenadas': self.coordenadas,
+            'id': self.id,
         }
 
 
