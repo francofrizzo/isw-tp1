@@ -106,5 +106,15 @@
             2
         ]
     }
+},
+{
+    "model": "wifindbar.bar",
+    "pk": 6,
+    "fields": {
+        "nombre": "Deportes UBA",
+        "direccion": "",
+        "ciudad": "",
+        "coordenadas": "SRID=4326;POINT (-58.44579 -34.541989)"
+    }
 }
 ]
