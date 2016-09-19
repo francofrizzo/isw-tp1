@@ -18,15 +18,19 @@ class BaresCercaDeDireccionList(ListView):
         ## 0.00001 grados son aprox 1.1 metros
         radio_en_metros = self.kwargs['distancia_metros']
         radio_en_grados_aproximado = 0.00001 * (int(radio_en_metros)/1.1)
-        geocoder = GoogleV3()
-        location_centro_de_busqueda = geocoder.geocode(self.kwargs['direccion_busqueda'])
-        if location_centro_de_busqueda:
-            point_centro_de_busqueda = geos.Point(y=location_centro_de_busqueda.latitude, x=location_centro_de_busqueda.longitude, srid=4326)
+        self.geocoder = GoogleV3()
+        self.location_centro_de_busqueda = self.geocoder.geocode(self.kwargs['direccion_busqueda'])
+        if self.location_centro_de_busqueda:
+            point_centro_de_busqueda = geos.Point(y=self.location_centro_de_busqueda.latitude, x=self.location_centro_de_busqueda.longitude, srid=4326)
             result = Bar.objects.filter(coordenadas__distance_lte=(point_centro_de_busqueda, radio_en_grados_aproximado))
         else:
             messages.warning(request, "No pudimos obtener la ubicación de la dirección ingresada.")
             return Bar.objects.none()
         return result
+    def get_context_data(self, **kwargs):
+        context = super(BaresCercaDeDireccionList, self).get_context_data(**kwargs)
+        context['location_centro_de_busqueda'] = self.location_centro_de_busqueda
+        return context
 
 
 class BarDetailView(DetailView):
