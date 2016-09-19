@@ -160,3 +160,5 @@ STATICFILES_DIRS = (
 STATIC_ROOT = "/srv/static"
 
 SPATIALITE_LIBRARY_PATH = 'mod_spatialite'
+
+SITE_ID = 2

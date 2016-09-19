@@ -1,1 +1,110 @@
-[{"model": "contenttypes.contenttype", "fields": {"app_label": "admin", "model": "logentry"}}, {"model": "contenttypes.contenttype", "fields": {"app_label": "auth", "model": "user"}}, {"model": "contenttypes.contenttype", "fields": {"app_label": "auth", "model": "group"}}, {"model": "contenttypes.contenttype", "fields": {"app_label": "auth", "model": "permission"}}, {"model": "contenttypes.contenttype", "fields": {"app_label": "contenttypes", "model": "contenttype"}}, {"model": "contenttypes.contenttype", "fields": {"app_label": "sessions", "model": "session"}}, {"model": "contenttypes.contenttype", "fields": {"app_label": "wifindbar", "model": "caracteristica"}}, {"model": "contenttypes.contenttype", "fields": {"app_label": "wifindbar", "model": "bar"}}, {"model": "contenttypes.contenttype", "fields": {"app_label": "wifindbar", "model": "calificacion"}}, {"model": "sessions.session", "pk": "oq2er4huoy6abmljjmitvgqe5m0143n8", "fields": {"session_data": "NWI5NTA1NTA0M2ZkOGFlOGQxMDk4NDVjYjFhZDEzNDI0NTIzNDUxNTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiODdhNWQxNjVkMTg3MjIwNDQ3NDBiYmRkNGZhMDRmYWZlYWZjM2Y2YSIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=", "expire_date": "2016-10-02T21:05:18.265Z"}}, {"model": "wifindbar.bar", "pk": 1, "fields": {"nombre": "Krakow", "direccion": "Rep\u00fablica Bolivariana de Venezuela 444", "ciudad": "Ciudad Aut\u00f3noma de Buenos Aires", "coordenadas": "SRID=4326;POINT (-58.372679 -34.613749)"}}, {"model": "wifindbar.bar", "pk": 2, "fields": {"nombre": "Antares San Telmo", "direccion": "Bol\u00edvar 491", "ciudad": "Ciudad Aut\u00f3noma de Buenos Aires", "coordenadas": null}}, {"model": "wifindbar.bar", "pk": 3, "fields": {"nombre": "La Puerta Roja", "direccion": "Chacabuco 733", "ciudad": "Ciudad Aut\u00f3noma de Buenos Aires", "coordenadas": null}}, {"model": "wifindbar.bar", "pk": 4, "fields": {"nombre": "BarbaRoja San Telmo", "direccion": "Defensa 550", "ciudad": "Ciudad Aut\u00f3noma de Buenos Aires", "coordenadas": null}}, {"model": "wifindbar.bar", "pk": 5, "fields": {"nombre": "San Telmo Brew Pub", "direccion": "Bol\u00edvar 583", "ciudad": "Ciudad Aut\u00f3noma de Buenos Aires", "coordenadas": null}}, {"model": "auth.permission", "fields": {"name": "Can add log entry", "content_type": 1, "codename": "add_logentry"}}, {"model": "auth.permission", "fields": {"name": "Can change log entry", "content_type": 1, "codename": "change_logentry"}}, {"model": "auth.permission", "fields": {"name": "Can delete log entry", "content_type": 1, "codename": "delete_logentry"}}, {"model": "auth.permission", "fields": {"name": "Can add user", "content_type": 2, "codename": "add_user"}}, {"model": "auth.permission", "fields": {"name": "Can change user", "content_type": 2, "codename": "change_user"}}, {"model": "auth.permission", "fields": {"name": "Can delete user", "content_type": 2, "codename": "delete_user"}}, {"model": "auth.permission", "fields": {"name": "Can add group", "content_type": 3, "codename": "add_group"}}, {"model": "auth.permission", "fields": {"name": "Can change group", "content_type": 3, "codename": "change_group"}}, {"model": "auth.permission", "fields": {"name": "Can delete group", "content_type": 3, "codename": "delete_group"}}, {"model": "auth.permission", "fields": {"name": "Can add permission", "content_type": 4, "codename": "add_permission"}}, {"model": "auth.permission", "fields": {"name": "Can change permission", "content_type": 4, "codename": "change_permission"}}, {"model": "auth.permission", "fields": {"name": "Can delete permission", "content_type": 4, "codename": "delete_permission"}}, {"model": "auth.permission", "fields": {"name": "Can add content type", "content_type": 5, "codename": "add_contenttype"}}, {"model": "auth.permission", "fields": {"name": "Can change content type", "content_type": 5, "codename": "change_contenttype"}}, {"model": "auth.permission", "fields": {"name": "Can delete content type", "content_type": 5, "codename": "delete_contenttype"}}, {"model": "auth.permission", "fields": {"name": "Can add session", "content_type": 6, "codename": "add_session"}}, {"model": "auth.permission", "fields": {"name": "Can change session", "content_type": 6, "codename": "change_session"}}, {"model": "auth.permission", "fields": {"name": "Can delete session", "content_type": 6, "codename": "delete_session"}}, {"model": "auth.permission", "fields": {"name": "Can add caracteristica", "content_type": 7, "codename": "add_caracteristica"}}, {"model": "auth.permission", "fields": {"name": "Can change caracteristica", "content_type": 7, "codename": "change_caracteristica"}}, {"model": "auth.permission", "fields": {"name": "Can delete caracteristica", "content_type": 7, "codename": "delete_caracteristica"}}, {"model": "auth.permission", "fields": {"name": "Can add bar", "content_type": 8, "codename": "add_bar"}}, {"model": "auth.permission", "fields": {"name": "Can change bar", "content_type": 8, "codename": "change_bar"}}, {"model": "auth.permission", "fields": {"name": "Can delete bar", "content_type": 8, "codename": "delete_bar"}}, {"model": "auth.permission", "fields": {"name": "Can add calificacion", "content_type": 9, "codename": "add_calificacion"}}, {"model": "auth.permission", "fields": {"name": "Can change calificacion", "content_type": 9, "codename": "change_calificacion"}}, {"model": "auth.permission", "fields": {"name": "Can delete calificacion", "content_type": 9, "codename": "delete_calificacion"}}, {"model": "auth.user", "fields": {"password": "pbkdf2_sha256$30000$MAVKNMH3WIUe$teiEQ88Dp6daxHbNlxW3s8O8Q9KMc/NVjZNhuPnd/A0=", "last_login": "2016-09-18T21:05:18.163Z", "is_superuser": true, "username": "admin", "first_name": "", "last_name": "", "email": "a@a.com", "is_staff": true, "is_active": true, "date_joined": "2016-09-18T21:05:08.566Z", "groups": [], "user_permissions": []}}, {"model": "admin.logentry", "pk": 1, "fields": {"action_time": "2016-09-18T21:27:13.093Z", "user": 1, "content_type": 8, "object_id": "1", "object_repr": "Krakow", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}, {"model": "admin.logentry", "pk": 2, "fields": {"action_time": "2016-09-18T21:29:05.876Z", "user": 1, "content_type": 8, "object_id": "2", "object_repr": "Antares San Telmo", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}, {"model": "admin.logentry", "pk": 3, "fields": {"action_time": "2016-09-18T21:29:38.149Z", "user": 1, "content_type": 8, "object_id": "3", "object_repr": "La Puerta Roja", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}, {"model": "admin.logentry", "pk": 4, "fields": {"action_time": "2016-09-18T21:30:23.575Z", "user": 1, "content_type": 8, "object_id": "4", "object_repr": "BarbaRoja San Telmo", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}, {"model": "admin.logentry", "pk": 5, "fields": {"action_time": "2016-09-18T21:31:49.665Z", "user": 1, "content_type": 8, "object_id": "5", "object_repr": "San Telmo Brew Pub", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}]
+[
+  {
+      "model": "auth.user",
+      "pk": 1,
+      "fields": {
+          "password": "pbkdf2_sha256$30000$MAVKNMH3WIUe$teiEQ88Dp6daxHbNlxW3s8O8Q9KMc/NVjZNhuPnd/A0=",
+          "last_login": "2016-09-18T21:05:18.163Z",
+          "is_superuser": true,
+          "username": "admin",
+          "first_name": "",
+          "last_name": "",
+          "email": "a@a.com",
+          "is_staff": true,
+          "is_active": true,
+          "date_joined": "2016-09-18T21:05:08.566Z",
+          "groups": [],
+          "user_permissions": []
+      }
+  },
+  {
+      "model": "auth.user",
+      "pk": 2,
+      "fields": {
+          "password": "pbkdf2_sha256$30000$cPoBbMxD6xRA$HMN7hoo9q6hIB1Y+pDgrwkE13AMkU5r4eVr5bcZft2M=",
+          "last_login": "2016-09-19T09:36:54.761Z",
+          "is_superuser": true,
+          "username": "pablo",
+          "first_name": "",
+          "last_name": "",
+          "email": "pmontepagano@gmail.com",
+          "is_staff": true,
+          "is_active": true,
+          "date_joined": "2016-09-19T09:36:45.144Z",
+          "groups": [],
+          "user_permissions": []
+      }
+  },
+{
+    "model": "wifindbar.bar",
+    "pk": 1,
+    "fields": {
+        "nombre": "Krakow",
+        "direccion": "Rep\u00fablica Bolivariana de Venezuela 444",
+        "ciudad": "Ciudad Aut\u00f3noma de Buenos Aires",
+        "coordenadas": "SRID=4326;POINT (-58.372679 -34.613749)"
+    }
+},
+{
+    "model": "wifindbar.bar",
+    "pk": 2,
+    "fields": {
+        "nombre": "Antares San Telmo",
+        "direccion": "Bol\u00edvar 491",
+        "ciudad": "Ciudad Aut\u00f3noma de Buenos Aires",
+        "coordenadas": null
+    }
+},
+{
+    "model": "wifindbar.bar",
+    "pk": 3,
+    "fields": {
+        "nombre": "La Puerta Roja",
+        "direccion": "Chacabuco 733",
+        "ciudad": "Ciudad Aut\u00f3noma de Buenos Aires",
+        "coordenadas": null
+    }
+},
+{
+    "model": "wifindbar.bar",
+    "pk": 4,
+    "fields": {
+        "nombre": "BarbaRoja San Telmo",
+        "direccion": "Defensa 550",
+        "ciudad": "Ciudad Aut\u00f3noma de Buenos Aires",
+        "coordenadas": null
+    }
+},
+{
+    "model": "wifindbar.bar",
+    "pk": 5,
+    "fields": {
+        "nombre": "San Telmo Brew Pub",
+        "direccion": "Bol\u00edvar 583",
+        "ciudad": "Ciudad Aut\u00f3noma de Buenos Aires",
+        "coordenadas": null
+    }
+},
+{
+    "model": "sites.site",
+    "pk": 2,
+    "fields": {
+        "domain": "wifindbar.xyz",
+        "name": "WiFindBar"
+    }
+},
+{
+    "model": "socialaccount.socialapp",
+    "pk": 1,
+    "fields": {
+        "provider": "google",
+        "name": "Google",
+        "client_id": "645576793516-atcaa6rub3eekrk4d4s8vaac4q0ttasu.apps.googleusercontent.com",
+        "secret": "QVxRDll51hvtEIT102Jzoq__",
+        "key": "",
+        "sites": [
+            2
+        ]
+    }
+}
+]
