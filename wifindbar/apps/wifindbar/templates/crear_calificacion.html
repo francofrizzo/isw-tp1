@@ -1,0 +1,29 @@
+{% extends 'generic.html' %}
+
+{% load staticfiles %}
+{% block title %}Calificar un bar - Wifindbar{% endblock %}
+{% block main %}
+
+
+<h1 class="major">Calificar bar {{bar.nombre}}</h1>
+
+<form action="" method="post">
+  {% csrf_token %}
+  <!-- {{ form.as_p }} -->
+  <input type="hidden" name="bar" value="{{bar.id}}" />
+  <div class="row uniform">
+  {% for c in caracteristicas %}
+    <div class="6u 12u$(small)">
+      <label for="{{c.nombre}}">{{c.nombre}}</label>
+      {% if not c.obligatoria %}
+      <input type="checkbox" id="{{c.nombre}}_calificar" name="{{c.nombre}}_calificar" />
+      <label for="{{c.nombre}}_calificar">calificar</label>
+      {% endif %}
+      <input type="range" id="{{c.nombre}}" name="{{c.nombre}}" min="1" max="5" step="1" />
+    </div>
+  {% endfor %}
+  </div>
+  <input type="submit" class="special" value="Guardar" />
+</form>
+
+{% endblock main %}

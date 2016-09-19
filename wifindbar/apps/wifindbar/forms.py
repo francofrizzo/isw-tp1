@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Bar
+from .models import Bar, Caracteristica, Calificacion
 from django.contrib.gis.forms import OSMWidget
 
 

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView
-from .models import Bar, Calificacion
+from .models import Bar, Calificacion, Caracteristica
 from .forms import BarModelForm
 from django.contrib import messages
 from django.contrib.gis import geos
@@ -41,3 +41,14 @@ class BarDetailView(DetailView):
 class BarCreateView(CreateView):
     form_class = BarModelForm
     template_name = "crear_bar.html"
+
+class CalificacionCreateView(CreateView):
+    model = Calificacion
+    fields = ['bar']
+    template_name = "crear_calificacion.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(CalificacionCreateView, self).get_context_data(**kwargs)
+        context['bar'] = Bar.objects.get(pk=self.kwargs['barid'])
+        context['caracteristicas'] = Caracteristica.objects.all()
+        return context
