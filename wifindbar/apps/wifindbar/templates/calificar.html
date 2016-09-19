@@ -1,0 +1,16 @@
+{% extends 'generic.html' %}
+
+{% load staticfiles %}
+{% block title %}Calificar un bar - Wifindbar{% endblock %}
+{% block main %}
+
+
+<h1 class="major">Calificar bar {{bar.nombre}}</h1>
+
+<form action="" method="post">
+  {% csrf_token %}
+  {{ formset.as_p }}
+  <input type="submit" class="special" value="Guardar" />
+</form>
+
+{% endblock main %}

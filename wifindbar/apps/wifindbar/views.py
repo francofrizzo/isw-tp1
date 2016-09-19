@@ -2,13 +2,15 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView
 from .models import Bar, Calificacion, Caracteristica
-from .forms import BarModelForm, CalificacionModelForm
+from .forms import BarModelForm, CalificacionModelForm, CalificacionFormSet
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.gis import geos
 from django.contrib.gis import measure
 from geopy.geocoders import GoogleV3
 from json_views.views import JSONListView
+from django.shortcuts import render_to_response
 # Create your views here.
 
 class HomeView(TemplateView):
@@ -74,3 +76,12 @@ class BaresCercaDeCoordenadaJSONList(JSONListView):
         self.point_centro_de_busqueda = geos.Point(y=lat, x=lng, srid=4326)
         result = Bar.objects.filter(coordenadas__distance_lte=(self.point_centro_de_busqueda, radio_en_grados_aproximado))
         return result
+
+@login_required
+def calificar_bar(request):
+    deportes = Bar.objects.get(id=6)
+    califs_deportes = Calificacion.objects.filter(bar=deportes)
+    todas_las_caracteristicas = Caracteristica.objects.all()
+    initial_caracteristicas = [{'caracteristica': i,} for i in todas_las_caracteristicas]
+    fset = CalificacionFormSet(queryset=califs_deportes, initial=initial_caracteristicas)
+    return render_to_response("calificar.html", {"formset": fset,})
