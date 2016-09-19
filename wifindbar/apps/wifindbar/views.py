@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView
 from .models import Bar, Calificacion, Caracteristica
-from .forms import BarModelForm
+from .forms import BarModelForm, CalificacionModelForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.contrib.gis import geos
 from django.contrib.gis import measure
@@ -50,16 +51,17 @@ class BarCreateView(CreateView):
     form_class = BarModelForm
     template_name = "crear_bar.html"
 
-class CalificacionCreateView(CreateView):
+class CalificacionCreateView(LoginRequiredMixin, CreateView):
+    login_url = '/accounts/login/'
+    redirect_field_name = 'redirect_to'
     model = Calificacion
-    fields = ['bar']
+    form_class = CalificacionModelForm
     template_name = "crear_calificacion.html"
 
-    def get_context_data(self, **kwargs):
-        context = super(CalificacionCreateView, self).get_context_data(**kwargs)
-        context['bar'] = Bar.objects.get(pk=self.kwargs['barid'])
-        context['caracteristicas'] = Caracteristica.objects.all()
-        return context
+    def form_valid(self, form):
+        calificacion = form.save(commit=False)
+        calificacion.user = self.request.user
+        return super(CalificacionCreateView, self).form_valid(form)
 
 class BaresCercaDeCoordenadaJSONList(JSONListView):
     model = Bar

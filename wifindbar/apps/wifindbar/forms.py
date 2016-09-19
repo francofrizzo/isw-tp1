@@ -13,3 +13,8 @@ class BarModelForm(forms.ModelForm):
         widgets = {
             'coordenadas': PointWidget()
         }
+
+class CalificacionModelForm(forms.ModelForm):
+    class Meta:
+        model = Calificacion
+        fields = ['bar', 'caracteristica', 'puntaje']
