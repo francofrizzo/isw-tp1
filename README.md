@@ -9,6 +9,7 @@ Trabajo práctico Nº 1 - Ingeniería de Software 1+2 - FCEN, UBA
     mkvirtualenv --python=python3 wifindbar
     pip install -U -r requirements.txt
     ./manage.py migrate
+    ./manage.py loaddata wifindbar/fixtures/initial_data.json
     ./manage.py runserver
 
 ## Not-so-quick start

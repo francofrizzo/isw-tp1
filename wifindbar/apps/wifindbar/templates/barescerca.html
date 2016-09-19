@@ -1,0 +1,133 @@
+{% extends 'generic.html' %}
+
+{% load staticfiles %}
+{% block title %}Buscar bares{% endblock %}
+
+{% block extrahead %}
+	<style>
+
+      #map {
+        height: 80%;
+				min-height: 80vh;
+      }
+    </style>
+{% endblock extrahead %}
+{% block main %}
+
+<p><a href="{% url 'bar_create_view' %}">Agregar nuevo bar...</a></p>
+<div id="map"></div>
+
+
+
+<table class="table table-bordered table-condensed table-hover table-striped" >
+  <thead>
+    <th>Bar</th>
+    <th>Direccion</th>
+    <th>Ciudad</th>
+  </thead>
+  <tbody>
+    {% for b in object_list %}
+
+        <tr>
+          <td><a href="{% url 'bar_detail_view' b.id %}">{{b.nombre}}</a></td>
+          <td><a href="{% url 'bar_detail_view' b.id %}">{{b.direccion}}</a></td>
+          <td><a href="{% url 'bar_detail_view' b.id %}">{{b.ciudad}}</a></td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h1 class="major">Buscar bares...</h1>
+
+<form method="get" action="">
+	{% csrf_token %}
+	<div class="row uniform">
+		<div class="12u$">
+			<input type="text" name="direccion" id="direccion" value="" placeholder="Name" />
+		</div>
+
+		<div class="12u$">
+				<input type="submit" value="Buscar" class="special" />
+		</div>
+	</div>
+</form>
+
+<script>
+
+
+	function ubicarMarkers(location, radio, map) {
+
+	  // obtengo por AJAX los bares cercanos. Ver https://learn.jquery.com/ajax/jquery-ajax-methods/
+	  $.ajax({
+	    url: "{% url 'bares_json' %}",
+	    data: {
+	      lat: location.lat,
+	      lng: location.lng,
+	      radio_en_metros: radio,
+	    },
+	    type: "GET",
+	    dataType: "json", // the type of data we expect back
+	    //jsonp: "jsoncallback", // https://learn.jquery.com/ajax/working-with-jsonp/
+	    success: function( json ) {
+
+
+	      $.each(json["bar_list"], function(index, value){
+	        console.log(value);
+					var bar_marker = new google.maps.Marker({
+			     	position: { lng:value["coordenadas"][0], lat:value["coordenadas"][1] },
+			     	map: map,
+			     	title: value["nombre"],
+		  		});
+	      });
+
+
+
+	    },
+	  });
+
+}
+  var map;
+  function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: -34.542262, lng: -58.442503 },
+      zoom: 14,
+    });
+		var infoWindow = new google.maps.InfoWindow({map: map});
+
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+
+        infoWindow.setPosition(pos);
+        infoWindow.close();
+        map.setCenter(pos);
+				ubicarMarkers(pos, 8000, map);
+      }, function() {
+        handleLocationError(true, infoWindow, map.getCenter());
+      }, {enableHighAccuracy: true}	);
+    } else {
+      // Browser doesn't support Geolocation
+      handleLocationError(false, infoWindow, map.getCenter());
+    }
+  }
+
+  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    infoWindow.setPosition(pos);
+    infoWindow.setContent(browserHasGeolocation ?
+                          'Error: The Geolocation service failed.' :
+                          'Error: Your browser doesn\'t support geolocation.');
+  }
+
+
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7CRt0SLNHRJS0I9UkXupGNZiE1kEO2mM&callback=initMap"
+async defer></script>
+
+
+
+{% endblock main %}

@@ -20,6 +20,13 @@ class Bar(models.Model):
     coordenadas = models.PointField(geography=True, blank=True, null=True)
     def __str__(self):
         return self.nombre
+    def serialize(self):
+        return {
+            'nombre': self.nombre,
+            'direccion': self.direccion,
+            'ciudad': self.direccion,
+            'coordenadas': self.coordenadas,
+        }
 
 
 
