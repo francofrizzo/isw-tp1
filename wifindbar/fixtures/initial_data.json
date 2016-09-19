@@ -116,5 +116,29 @@
         "ciudad": "",
         "coordenadas": "SRID=4326;POINT (-58.44579 -34.541989)"
     }
+},
+{
+    "model": "wifindbar.caracteristica",
+    "pk": 1,
+    "fields": {
+        "nombre": "Wifi",
+        "obligatoria": true
+    }
+},
+{
+    "model": "wifindbar.caracteristica",
+    "pk": 2,
+    "fields": {
+        "nombre": "Enchufes",
+        "obligatoria": true
+    }
+},
+{
+    "model": "wifindbar.caracteristica",
+    "pk": 3,
+    "fields": {
+        "nombre": "Atención",
+        "obligatoria": false
+    }
 }
 ]
