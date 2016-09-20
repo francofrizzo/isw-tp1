@@ -1,7 +1,7 @@
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView
 from .models import Bar, Calificacion, Caracteristica
-from .forms import BarModelForm, CalificacionFormSet, CalificacionModelForm
+from .forms import BarModelForm, CalificacionModelForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
