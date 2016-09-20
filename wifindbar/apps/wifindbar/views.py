@@ -1,8 +1,7 @@
-from django.shortcuts import render
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView
 from .models import Bar, Calificacion, Caracteristica
-from .forms import BarModelForm, CalificacionModelForm, CalificacionFormSet
+from .forms import BarModelForm, CalificacionFormSet, CalificacionModelForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -10,7 +9,8 @@ from django.contrib.gis import geos
 from django.contrib.gis import measure
 from geopy.geocoders import GoogleV3
 from json_views.views import JSONListView
-from django.shortcuts import render_to_response
+from django.shortcuts import render, get_object_or_404
+from django.forms import inlineformset_factory, formset_factory, modelformset_factory
 # Create your views here.
 
 class HomeView(TemplateView):
@@ -53,17 +53,6 @@ class BarCreateView(CreateView):
     form_class = BarModelForm
     template_name = "crear_bar.html"
 
-class CalificacionCreateView(LoginRequiredMixin, CreateView):
-    login_url = '/accounts/login/'
-    redirect_field_name = 'redirect_to'
-    model = Calificacion
-    form_class = CalificacionModelForm
-    template_name = "crear_calificacion.html"
-
-    def form_valid(self, form):
-        calificacion = form.save(commit=False)
-        calificacion.user = self.request.user
-        return super(CalificacionCreateView, self).form_valid(form)
 
 class BaresCercaDeCoordenadaJSONList(JSONListView):
     model = Bar
@@ -78,10 +67,28 @@ class BaresCercaDeCoordenadaJSONList(JSONListView):
         return result
 
 @login_required
-def calificar_bar(request):
-    deportes = Bar.objects.get(id=6)
-    califs_deportes = Calificacion.objects.filter(bar=deportes)
-    todas_las_caracteristicas = Caracteristica.objects.all()
-    initial_caracteristicas = [{'caracteristica': i,} for i in todas_las_caracteristicas]
-    fset = CalificacionFormSet(queryset=califs_deportes, initial=initial_caracteristicas)
-    return render_to_response("calificar.html", {"formset": fset,})
+def calificar_bar(request, barid):
+    user = request.user
+    estebar = get_object_or_404(Bar, pk=barid)
+    califs_estebar = Calificacion.objects.filter(bar=estebar, user=user)
+    cant_caracteristicas = len(Caracteristica.objects.all())
+    cant_caracteristicas_no_calificadas = cant_caracteristicas - len(Calificacion.objects.filter(bar=estebar, user=user))
+
+    CalificacionModelFormSet = modelformset_factory(Calificacion, form=CalificacionModelForm, extra=cant_caracteristicas_no_calificadas )
+    if request.method == "POST":
+        fset = CalificacionModelFormSet(
+            request.POST, request.FILES,
+            queryset=califs_estebar,
+        )
+        if fset.is_valid():
+            for form in fset:
+                resdir = form.clean()
+                try:
+                    cal = Calificacion.objects.get(bar=estebar, user=request.user, caracteristica=resdir['caracteristica'])
+                    cal.puntaje = resdir['puntaje']
+                except:
+                    cal = Calificacion(bar=estebar, user=request.user, caracteristica=resdir['caracteristica'], puntaje=resdir['puntaje'])
+                cal.save()
+    else:
+        fset = CalificacionModelFormSet(queryset=califs_estebar)
+    return render(request, "calificar.html", {"formset": fset, "bar": estebar})

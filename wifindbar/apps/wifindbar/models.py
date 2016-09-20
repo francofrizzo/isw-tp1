@@ -50,3 +50,5 @@ class Calificacion(models.Model):
         index_together = (("bar", "caracteristica"), )
         verbose_name = "calificación"
         verbose_name_plural = "calificaciones"
+    def __str__(self):
+        return "Bar {}, {}, {}".format(self.bar.nombre, self.caracteristica.nombre, self.user.username)
