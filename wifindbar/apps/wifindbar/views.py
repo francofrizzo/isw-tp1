@@ -11,6 +11,7 @@ from geopy.geocoders import GoogleV3
 from json_views.views import JSONListView
 from django.shortcuts import render, get_object_or_404
 from django.forms import inlineformset_factory, formset_factory, modelformset_factory
+from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 
 class HomeView(TemplateView):
@@ -33,7 +34,24 @@ class BaresCercaDeDireccionList(ListView):
         else:
             messages.warning(request, "No pudimos obtener la ubicación de la dirección ingresada.")
             return Bar.objects.none()
-        return result
+        caracs = Caracteristica.objects.all()
+        bares = result.all()
+        for bar in result:
+            califs = Calificacion.objects.filter(bar=bar)
+            promedios = {}
+            for c in caracs:
+                promedios[c.nombre] = sum(calif.puntaje for calif in califs.filter(caracteristica=c))
+            for k, v in self.request.GET.items():
+                try:
+                    c = caracs.get(nombre=k)
+                except ObjectDoesNotExist:
+                    continue
+                if promedios.get(k, False) and promedios[k] < int(v):
+                    print("Excluyendo bar {}".format(bar.nombre))
+                    bares = bares.exclude(id=bar.id)
+                    break
+        return bares
+
     def get_context_data(self, **kwargs):
         context = super(BaresCercaDeDireccionList, self).get_context_data(**kwargs)
         context['location_centro_de_busqueda'] = self.location_centro_de_busqueda
