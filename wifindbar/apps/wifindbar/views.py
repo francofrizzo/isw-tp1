@@ -41,6 +41,9 @@ class BaresCercaDeDireccionList(ListView):
             promedios = {}
             for c in caracs:
                 promedios[c.nombre] = sum(calif.puntaje for calif in califs.filter(caracteristica=c))
+                n = len(califs.filter(caracteristica=c))
+                if n != 0:
+                    promedios[c.nombre] /= float(n)
             for k, v in self.request.GET.items():
                 try:
                     c = caracs.get(nombre=k)
