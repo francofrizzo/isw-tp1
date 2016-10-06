@@ -6,8 +6,22 @@
 {% block extrahead %}
 {% endblock extrahead %}
 {% block main %}
+<h1 class="major">Buscar bares...</h1>
 
-<p><a href="{% url 'bar_create_view' %}">Agregar nuevo bar...</a></p>
+<form action="{% url 'listar_bares_cerca_de_direccion_form' %}" method="GET" class="form">
+		{% csrf_token %}
+		<div class="row uniform">
+			<div class="9u 12u$(xsmall)">
+					<input type="text" name="direccion_busqueda" id="direccion" value="" placeholder="Buscar bares cerca de..." />
+			</div>
+			<div class="3u 12u$(xsmall)">
+				<input type="number" name="distancia_metros" value="2000" />
+			</div>
+			<div class="6u 12u$(xsmall)">
+					<input type="submit" value="Buscar" class="special" />
+			</div>
+		</div>
+	</form>
 <div id="map"></div>
 
 
@@ -29,23 +43,7 @@
     {% endfor %}
   </tbody>
 </table>
-
-<h1 class="major">Buscar bares...</h1>
-
-<form action="{% url 'listar_bares_cerca_de_direccion_form' %}" method="GET" class="form">
-		{% csrf_token %}
-		<div class="row uniform">
-			<div class="9u 12u$(xsmall)">
-					<input type="text" name="direccion_busqueda" id="direccion" value="" placeholder="Buscar bares cerca de..." />
-			</div>
-			<div class="3u 12u$(xsmall)">
-				<input type="number" name="distancia_metros" value="2000" />
-			</div>
-			<div class="6u 12u$(xsmall)">
-					<input type="submit" value="Buscar" class="special" />
-			</div>
-		</div>
-	</form>
+<p><a href="{% url 'bar_create_view' %}">Agregar nuevo bar...</a></p>
 
 <script>
 
