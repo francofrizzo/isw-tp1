@@ -75,7 +75,7 @@ class BarDetailView(DetailView):
        return context
 
 
-class BarCreateView(CreateView):
+class BarCreateView(LoginRequiredMixin, CreateView):
     form_class = BarModelForm
     template_name = "crear_bar.html"
 
