@@ -14,7 +14,6 @@
 		<link rel="stylesheet" href="{% static "assets/css/main.css" %}" />
 		<!--[if lte IE 9]><link rel="stylesheet" href="{% static "assets/css/ie9.css" %}" /><![endif]-->
 		<!--[if lte IE 8]><link rel="stylesheet" href="{% static "assets/css/ie8.css" %}"/><![endif]-->
-
 		{% block extrahead %}
 		{% endblock extrahead %}
 	</head>
@@ -25,7 +24,7 @@
 				<a href="/" class="title">Wifindbar</a>
 				<nav>
 					<ul>
-						<li><a href="index.html">Home</a></li>
+						<li><a href="/">Home</a></li>
 						<!-- <li><a href="generic.html" class="active">Generic</a></li>
 						<li><a href="elements.html">Elements</a></li> -->
 						{% if user.is_authenticated %}
@@ -77,6 +76,10 @@
 			<script src="{% static "assets/js/util.js" %}"></script>
 			<!--[if lte IE 8]><script src="{% static "assets/js/ie/respond.min.js" %}"></script><![endif]-->
 			<script src="{% static "assets/js/main.js" %}"></script>
+
+			{% block extrafoot %}
+			{% endblock extrafoot %}
+
 
 	</body>
 </html>
