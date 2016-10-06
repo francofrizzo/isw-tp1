@@ -24,10 +24,15 @@ class BaresCercaDeDireccionList(ListView):
     template_name = "listar_bares.html"
     def get_queryset(self):
         ## 0.00001 grados son aprox 1.1 metros
-        radio_en_metros = self.kwargs['distancia_metros']
+        radio_en_metros = self.kwargs.get('distancia_metros', None)
+        direccion_busqueda = self.kwargs.get('direccion_busqueda', None)
+        if radio_en_metros is None:
+            radio_en_metros = self.request.GET.get('distancia_metros')
+        if direccion_busqueda is None:
+            direccion_busqueda = self.request.GET.get('direccion_busqueda')
         radio_en_grados_aproximado = 0.00001 * (int(radio_en_metros)/1.1)
         self.geocoder = GoogleV3()
-        self.location_centro_de_busqueda = self.geocoder.geocode(self.kwargs['direccion_busqueda'])
+        self.location_centro_de_busqueda = self.geocoder.geocode(direccion_busqueda)
         if self.location_centro_de_busqueda:
             point_centro_de_busqueda = geos.Point(y=self.location_centro_de_busqueda.latitude, x=self.location_centro_de_busqueda.longitude, srid=4326)
             result = Bar.objects.filter(coordenadas__distance_lte=(point_centro_de_busqueda, radio_en_grados_aproximado))
